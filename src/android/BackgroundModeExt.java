@@ -40,6 +40,8 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
+import org.apache.cordova.LOG;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -137,7 +139,7 @@ public class BackgroundModeExt extends CordovaPlugin {
     private boolean isIdle(){
         PowerManager powerManager = (PowerManager)getService(POWER_SERVICE);
 
-        log.d("REACHCordova: ", powerManager.isDeviceIdleMode);
+        LOG.d("REACHCordova: ", powerManager.isDeviceIdleMode());
 
         return powerManager.isDeviceIdleMode();
     }
