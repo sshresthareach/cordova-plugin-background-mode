@@ -115,6 +115,9 @@ public class BackgroundModeExt extends CordovaPlugin {
                 wakeup();
                 unlock();
                 break;
+            case  "isIdle":
+                isIdle();
+                break;
             default:
                 validAction = false;
         }
@@ -126,6 +129,17 @@ public class BackgroundModeExt extends CordovaPlugin {
         }
 
         return validAction;
+    }
+
+    /**
+     * checks if device is in idle state
+     */
+    private boolean isIdle(){
+        PowerManager powerManager = (PowerManager)getService(POWER_SERVICE);
+
+        log.d("REACHCordova: ", powerManager.isDeviceIdleMode);
+
+        return powerManager.isDeviceIdleMode();
     }
 
     /**
