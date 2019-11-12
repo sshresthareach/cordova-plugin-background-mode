@@ -75,9 +75,9 @@ exports.setEnabled = function(enable) {
 /**
  * Check if device is in idle mode 
  */
-exports.isIdle = function() {
+exports.isIdle = function(success, failure) {
     if (this._isAndroid) {
-        cordova.exec(null, null, "BackgroundModeExt", "isIdle", []);
+        cordova.exec(success, failure, "BackgroundModeExt", "isIdle", []);
     }
 };
 

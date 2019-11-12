@@ -117,9 +117,11 @@ public class BackgroundModeExt extends CordovaPlugin {
                 wakeup();
                 unlock();
                 break;
-            case  "isIdle":
-                isIdle(callback);
-                break;
+            case "isIdle":
+                boolean idle = isIdle();
+                callback.success(idle);
+                return true;
+//                break;
             default:
                 validAction = false;
         }
@@ -137,13 +139,15 @@ public class BackgroundModeExt extends CordovaPlugin {
      * checks if device is in idle state
      * @param callback The callback to invoke.
      */
-    private void isIdle(CallbackContext callback){
+    private boolean isIdle(){
         PowerManager powerManager = (PowerManager)getService(POWER_SERVICE);
-        boolean status   = powerManager.isDeviceIdleMode();
-        PluginResult res = new PluginResult(Status.OK, status);
-
-        callback.sendPluginResult(res);
+        boolean status = powerManager.isDeviceIdleMode();
+//        PluginResult res = new PluginResult(Status.OK, status);
+//
+//        callback.success();
+//        callback.sendPluginResult(res);
         LOG.d("REACHCordova: ", String.valueOf(status));
+        return status;
     }
 
     /**
