@@ -139,7 +139,7 @@ public class BackgroundModeExt extends CordovaPlugin {
     private boolean isIdle(){
         PowerManager powerManager = (PowerManager)getService(POWER_SERVICE);
 
-        LOG.d("REACHCordova: ", powerManager.isDeviceIdleMode());
+        LOG.d("REACHCordova: ", String.valueOf(powerManager.isDeviceIdleMode()));
 
         return powerManager.isDeviceIdleMode();
     }
