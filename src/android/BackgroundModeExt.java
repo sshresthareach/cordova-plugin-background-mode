@@ -118,10 +118,11 @@ public class BackgroundModeExt extends CordovaPlugin {
                 unlock();
                 break;
             case "isIdle":
-                boolean idle = isIdle();
-                callback.success(idle);
-                return true;
-//                break;
+                // boolean idle = isIdle();
+                // callback.success(String.valueOf(idle));
+                isIdle(callback);
+                // return true;
+               break;
             default:
                 validAction = false;
         }
@@ -139,15 +140,23 @@ public class BackgroundModeExt extends CordovaPlugin {
      * checks if device is in idle state
      * @param callback The callback to invoke.
      */
-    private boolean isIdle(){
-        PowerManager powerManager = (PowerManager)getService(POWER_SERVICE);
-        boolean status = powerManager.isDeviceIdleMode();
-//        PluginResult res = new PluginResult(Status.OK, status);
-//
-//        callback.success();
-//        callback.sendPluginResult(res);
+    private boolean isIdle(CallbackContext callback){
+        PowerManager powerManager = (PowerManager) getService(POWER_SERVICE);
+        boolean status;
+        
+        /**
+         * isDeviceIdleMode was added at api level 23
+         */
+        if(SDK_INT < 23){
+            status = false;
+        } else {
+            status = powerManager.isDeviceIdleMode();
+        }
+
         LOG.d("REACHCordova: ", String.valueOf(status));
-        return status;
+        PluginResult res = new PluginResult(Status.OK, status);
+
+        callback.sendPluginResult(res);
     }
 
     /**
@@ -171,9 +180,10 @@ public class BackgroundModeExt extends CordovaPlugin {
         Intent intent = getLaunchIntent();
 
         intent.addFlags(
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+            Intent.FLAG_ACTIVITY_SINGLE_TOP |
+            Intent.FLAG_ACTIVITY_CLEAR_TOP
+        );
 
         clearScreenAndKeyguardFlags();
         app.startActivity(intent);
