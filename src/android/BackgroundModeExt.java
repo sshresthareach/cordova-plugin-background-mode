@@ -1,6 +1,4 @@
 /*
- Copyright 2013 Sebastián Katzer
-
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
  distributed with this work for additional information
@@ -328,6 +326,8 @@ public class BackgroundModeExt extends CordovaPlugin {
 
     /**
      * Returns if the screen is active.
+     * @todo: use isInteractive and Display.getState() to figure out devices states
+     * @see: https://developer.android.com/reference/android/os/PowerManager.html#isInteractive()
      */
     @SuppressWarnings("deprecation")
     private boolean isDimmed()
