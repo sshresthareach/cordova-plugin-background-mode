@@ -23,7 +23,7 @@ interface BackgroundMode {
     on(
         eventName: string,
         callback: () => void,
-        scope: Object
+        scope?: Object
     )
 }
 
