@@ -19,7 +19,12 @@ interface BackgroundMode {
         callback: (isScreenOff: boolean) => void
     ): void,
     unlock(): void,
-    isActive(): boolean
+    isActive(): boolean,
+    on(
+        eventName: string,
+        callback: () => void,
+        scope: Object
+    )
 }
 
 interface CordovaPlugins {
