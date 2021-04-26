@@ -19,6 +19,7 @@ interface BackgroundMode {
         callback: (isScreenOff: boolean) => void
     ): void,
     unlock(): void,
+    dismissKeyGuard(): void,
     isActive(): boolean,
     on(
         eventName: string,

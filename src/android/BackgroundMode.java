@@ -111,7 +111,7 @@ public class BackgroundMode extends CordovaPlugin {
         if (validAction) {
             callback.success();
         } else {
-            callback.error("Invalid action: " + action);
+            callback.error("REACHLog: Invalid action: " + action);
         }
 
         return validAction;

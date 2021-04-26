@@ -272,6 +272,12 @@ exports.unlock = function() {
     }
 };
 
+exports.dismissKeyGuard = function() {
+    if(this._isAndroid){
+        cordova.exec(null, null, "BackgroundModeExt", "dissmissKeyGuard", []);
+    }
+}
+
 /**
  * If the mode is enabled or disabled.
  *

@@ -121,6 +121,9 @@ public class BackgroundModeExt extends CordovaPlugin {
                 isIdle(callback);
                 // return true;
                break;
+            case "dismissKeyGuard":
+                dismissKeyGuard();
+                break;
             default:
                 validAction = false;
         }
@@ -151,7 +154,7 @@ public class BackgroundModeExt extends CordovaPlugin {
             status = powerManager.isDeviceIdleMode();
         }
 
-        LOG.d("REACHCordova: isDeviceIdleMode ", String.valueOf(status));
+        LOG.d("REACHLog: isDeviceIdleMode ", String.valueOf(status));
         PluginResult res = new PluginResult(Status.OK, status);
 
         callback.sendPluginResult(res);
@@ -361,6 +364,10 @@ public class BackgroundModeExt extends CordovaPlugin {
     {
         addSreenAndKeyguardFlags();
         getApp().startActivity(getLaunchIntent());
+    }
+
+    private void dismissKeyGuard(){
+        addSreenAndKeyguardFlags();
     }
 
     /**
